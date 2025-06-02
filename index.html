@@ -1,55 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gothic Red Names</title>
-<style>
-  body {
-    background-color: black;
-    font-family: 'Old English Text MT', 'Gothic', serif;
-    color: red;
-    padding: 20px;
-  }
-  .name {
-    display: block;
-    font-size: 24px;
-    margin: 8px 0;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gothic Names</title>
+
+  <!-- Gothic Font -->
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000;
+      color: red;
+      font-family: 'UnifrakturMaguntia', cursive;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .top-image-wrapper {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .top-image {
+      width: 300px;
+      transition: transform 0.1s ease-out;
+    }
+
+    .name-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 34px;
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      line-height: 1.2;
+    }
+
+    .name {
+      white-space: nowrap;
+    }
+
+    .links-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .links-row a img {
+      height: 60px;
+      width: 60px;
+      border-radius: 12px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .links-row a img:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
-  <span class="name">Chris</span>
-  <span class="name">slith</span>
-  <span class="name">qoms</span>
-  <span class="name">slachtoffer</span>
-  <span class="name">cam</span>
-  <span class="name">graves</span>
-  <span class="name">applesaucehurts1</span>
-  <span class="name">pizzasleater</span>
-  <span class="name">kort</span>
-  <span class="name">despair</span>
-  <span class="name">layla</span>
-  <span class="name">800ds</span>
-  <span class="name">ageplayerloli</span>
-  <span class="name">akane</span>
-  <span class="name">alex</span>
-  <span class="name">archi8ve</span>
-  <span class="name">dismayings</span>
-  <span class="name">kin</span>
-  <span class="name">pe</span>
-  <span class="name">rauds</span>
-  <span class="name">swat</span>
-  <span class="name">vast</span>
-  <span class="name">shy</span>
-  <span class="name">dolly</span>
-  <span class="name">slug</span>
-  <span class="name">graphicalcontent</span>
-  <span class="name">uezt</span>
-  <span class="name">#</span>
-  <span class="name">31</span>
-  <span class="name">pussyslayer</span>
-  <span class="name">0_x</span>
-  <span class="name">634</span>
+
+  <!-- Top Image -->
+  <div class="top-image-wrapper">
+    <img src="top.png" alt="Top Image" class="top-image" id="tiltImage" />
+  </div>
+
+  <!-- Name List -->
+  <div class="name-list">
+    <div class="name">Chris</div><div class="name">slith</div><div class="name">qoms</div>
+    <div class="name">slachtoffer</div><div class="name">cam</div><div class="name">graves</div>
+    <div class="name">applesaucehurts1</div><div class="name">pizzasleater</div><div class="name">kort</div>
+    <div class="name">despair</div><div class="name">layla</div><div class="name">800ds</div>
+    <div class="name">ageplayerloli</div><div class="name">akane</div><div class="name">alex</div>
+    <div class="name">archi8ve</div><div class="name">dismayings</div><div class="name">kin</div>
+    <div class="name">pe</div><div class="name">rauds</div><div class="name">swat</div>
+    <div class="name">vast</div><div class="name">shy</div><div class="name">dolly</div>
+    <div class="name">slug</div><div class="name">graphicalcontent</div><div class="name">uezt</div>
+    <div class="name">#31</div><div class="name">pussyslayer</div><div class="name">0_x</div><div class="name">634</div>
+  </div>
+
+  <!-- Discord + Gov Link Row -->
+  <div class="links-row">
+    <a href="https://discord.gg/paste" target="_blank" rel="noopener noreferrer">
+      <img src="discord.png" alt="Join Discord" />
+    </a>
+    <a href="https://www.justice.gov/criminal-ccips/extortion" target="_blank" rel="noopener noreferrer">
+      <img src="gov.png" alt="Get Help (Extortion)" />
+    </a>
+  </div>
+
+  <!-- Tilt Script -->
+  <script>
+    const image = document.getElementById('tiltImage');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      image.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+    document.addEventListener('mouseleave', () => {
+      image.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  </script>
+
 </body>
 </html>
