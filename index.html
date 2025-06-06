@@ -2,162 +2,227 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>LONG LIVE KNR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <title>sdfg.store</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: black;
       margin: 0;
-      padding: 0;
+      background: black;
       color: white;
-      font-family: 'Bebas Neue', sans-serif;
-      overflow-x: hidden;
-      position: relative;
-      height: 100vh;
+      font-family: 'Press Start 2P', monospace;
+      overflow: hidden;
     }
 
-    .container {
+    .screen {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    img {
-      max-width: 450px;
-      height: auto;
-      margin-bottom: 50px;
-    }
-
-    .rainbow-text {
-      font-size: 7em;
-      font-weight: bold;
-      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-      background-size: 1400% 1400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rainbow 8s linear infinite;
-      margin-bottom: 50px;
-    }
-
-    .names {
-      display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-      max-width: 90%;
-      font-size: 3.5em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .screen.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .clickable {
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    img.profile {
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 20px;
+    }
+
+    .username {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .back {
+      font-size: 14px;
+      margin-top: 0;
+      cursor: pointer;
       text-align: center;
     }
 
-    .names div {
-      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-      background-size: 1400% 1400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rainbow 6s linear infinite;
-      white-space: nowrap;
+    .discord-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
 
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Particle style */
-    .particle {
-      position: fixed;
+    .disabled {
       pointer-events: none;
-      opacity: 1;
-      animation: fall 2s forwards;
-      mix-blend-mode: screen;
-      will-change: transform, opacity;
+      opacity: 0.4;
     }
 
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
+    .plus {
+      position: absolute;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
+      pointer-events: none;
+      user-select: none;
+      font-size: 10px;
+      opacity: 1;
+      animation: fadeOut 0.7s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <img src="toptop.png" alt="Top Image" />
-    <div class="rainbow-text">LONG LIVE KNR</div>
-    <div class="names">
-      <div>SwatKNR</div>
-      <div>PrayKNR</div>
-      <div>KodachiKNR</div>
-      <div>SwatcalledKNR</div>
-      <div>LurkinggKNR</div>
-      <div>UKNR</div>
-      <div>GravesKNR</div>
-      <div>AzezelKNR</div>
-      <div>NNKNR</div>
-      <div>VawuKNR</div>
-      <div>BladeKNR</div>
-      <div>DrippKNR</div>
-      <div>DmdKNR</div>
-      <div>AuoraKNR</div>
-      <div>BLIXKNR</div>
-      <div>FrostKNR</div>
-      <div>DesKNR</div>
-      <div>KuruKNR</div>
-      <div>KroneKNR</div>
-      <div>NexusKNR</div>
-      <div>XannyKNR</div>
-      <div>KJKNR</div>
-      <div>SaviorKNR</div>
-    </div>
+  <!-- Screen 1 -->
+  <div id="screen1" class="screen visible">
+    <div class="clickable" onclick="enterSite()">[enter]</div>
   </div>
 
+  <!-- Screen 2 -->
+  <div id="screen2" class="screen">
+    <div>sdfg.store</div>
+    <div class="clickable" id="membersBtn">members</div>
+  </div>
+
+  <!-- Screen 3 -->
+  <div id="screen3" class="screen">
+    <div class="clickable" onclick="showProfile('Pray')">Pray</div>
+    <div class="clickable" onclick="showProfile('Swat')">Swat</div>
+    <div class="clickable" onclick="showProfile('Qoms')">Qoms</div>
+    <div class="clickable" onclick="showProfile('Graves')">Graves</div>
+    <div class="clickable" onclick="showProfile('Lurking')">Lurking</div>
+    <div class="clickable" onclick="showProfile('U')">U</div>
+    <div class="clickable" onclick="switchScreen(3, 2)">back</div>
+  </div>
+
+  <!-- Screen 4 -->
+  <div id="screen4" class="screen">
+    <img id="profileImage" class="profile" src="" alt="Profile Image" />
+    <div class="username" id="username"></div>
+    <a id="discordLink" href="#" target="_blank">
+      <img src="discord.png" alt="Discord Icon" class="discord-icon" />
+    </a>
+    <div class="back" onclick="returnToMembers()">←</div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop preload="auto"></audio>
+
   <script>
-    document.addEventListener('mousemove', e => {
-      const particle = document.createElement('img');
-      particle.src = 'trailbro.png'; // your trail image file
-      particle.classList.add('particle');
+    const discordLinks = {
+      Pray: "discord://-users/224649665608417280",
+      Swat: "N/A",
+      Qoms: "discord://-users/273871090579800064",
+      Graves: "discord://-users/924433603516067910",
+      U: "discord://-users/1180248936691269700",
+      Lurking: "discord://-users/1151046479314698251"
+    };
 
-      const size = Math.random() * 6 + 6;
-      particle.style.width = size + 'px';
-      particle.style.height = 'auto';
+    const musicPlayer = document.getElementById("bgMusic");
+    musicPlayer.volume = 0.5;
+    let currentTrack = "";
 
-      particle.style.left = e.clientX + 'px';
-      particle.style.top = e.clientY + 'px';
+    function playMusic(fileName) {
+      if (currentTrack === fileName) return;
+      currentTrack = fileName;
+      musicPlayer.pause();
+      musicPlayer.src = fileName;
+      musicPlayer.currentTime = 0;
+      musicPlayer.play().catch(err => console.log("Play failed:", err));
+    }
 
-      particle.style.animationDuration = (Math.random() + 1.5) + 's';
+    function enterSite() {
+      playMusic('themainsong.mp3');
+      switchScreen(1, 2);
+    }
 
-      document.body.appendChild(particle);
+    function switchScreen(from, to) {
+      document.getElementById('screen' + from).classList.remove('visible');
+      setTimeout(() => {
+        document.getElementById('screen' + to).classList.add('visible');
 
-      particle.addEventListener('animationend', () => {
-        particle.remove();
+        if (to === 4) {
+          enablePlusTrail();
+        } else {
+          disablePlusTrail();
+        }
+      }, 300);
+
+      if (from === 4 && to >= 1 && to <= 3) {
+        playMusic('themainsong.mp3');
+      }
+    }
+
+    function showProfile(name) {
+      document.getElementById('username').textContent = name;
+      document.getElementById('profileImage').src = name + '.png';
+
+      const discordAnchor = document.getElementById('discordLink');
+      const link = discordLinks[name];
+
+      if (link && link !== "N/A") {
+        discordAnchor.href = link;
+        discordAnchor.classList.remove('disabled');
+      } else {
+        discordAnchor.href = "#";
+        discordAnchor.classList.add('disabled');
+      }
+
+      playMusic(name + 'song.mp3');
+      switchScreen(3, 4);
+    }
+
+    function returnToMembers() {
+      switchScreen(4, 3);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      musicPlayer.src = 'themainsong.mp3';
+      musicPlayer.load();
+
+      document.getElementById('membersBtn').addEventListener('click', () => {
+        switchScreen(2, 3);
       });
     });
-  </script>
 
-  <!-- Audio element without controls -->
-  <audio id="bg-music" src="themusic.mp3" loop></audio>
+    // + Trail Logic
+    function enablePlusTrail() {
+      document.addEventListener('mousemove', plusTrailHandler);
+    }
 
-  <script>
-    const music = document.getElementById('bg-music');
+    function disablePlusTrail() {
+      document.removeEventListener('mousemove', plusTrailHandler);
+    }
 
-    // Try autoplay immediately
-    music.play().catch(() => {
-      // If autoplay blocked, wait for user interaction
-      function playAfterInteraction() {
-        music.play();
-        window.removeEventListener('click', playAfterInteraction);
-        window.removeEventListener('keydown', playAfterInteraction);
-      }
-      window.addEventListener('click', playAfterInteraction);
-      window.addEventListener('keydown', playAfterInteraction);
-    });
+    function plusTrailHandler(e) {
+      const plus = document.createElement('div');
+      plus.className = 'plus';
+      plus.textContent = '+';
+      plus.style.left = `${e.clientX}px`;
+      plus.style.top = `${e.clientY}px`;
+      document.body.appendChild(plus);
+
+      setTimeout(() => {
+        plus.remove();
+      }, 700);
+    }
   </script>
 
 </body>
