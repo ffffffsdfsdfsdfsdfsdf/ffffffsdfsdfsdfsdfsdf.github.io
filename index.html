@@ -2,118 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FUCK YOU</title>
-
-  <!-- Gothic Font -->
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-
+  <title>LONG LIVE KNR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
     body {
-      background-color: #000;
-      color: red;
-      font-family: 'UnifrakturMaguntia', cursive;
-      text-align: center;
-      padding: 40px 20px;
+      background-color: black;
       margin: 0;
+      padding: 0;
+      color: white;
+      font-family: 'Bebas Neue', sans-serif;
       overflow-x: hidden;
-      cursor: url('customcursor.png') 16 16, auto;
+      position: relative;
+      height: 100vh;
     }
 
-    .top-image-wrapper {
-      perspective: 1000px;
+    .container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 30px;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
     }
 
-    .top-image {
-      width: 300px;
-      transition: transform 0.1s ease-out;
+    img {
+      max-width: 450px;
+      height: auto;
+      margin-bottom: 50px;
     }
 
-    .name-list {
+    .rainbow-text {
+      font-size: 7em;
+      font-weight: bold;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 1400% 1400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 8s linear infinite;
+      margin-bottom: 50px;
+    }
+
+    .names {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      font-size: 34px;
-      max-width: 1000px;
-      margin: 0 auto 40px;
-      line-height: 1.2;
+      gap: 30px;
+      max-width: 90%;
+      font-size: 3.5em;
+      text-align: center;
     }
 
-    .name {
+    .names div {
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 1400% 1400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 6s linear infinite;
       white-space: nowrap;
     }
 
-    .links-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin-top: 30px;
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    .links-row a img {
-      height: 60px;
-      width: 60px;
-      border-radius: 12px;
-      transition: transform 0.2s ease-in-out;
+    /* Particle style */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      opacity: 1;
+      animation: fall 2s forwards;
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
     }
 
-    .links-row a img:hover {
-      transform: scale(1.1);
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Image -->
-  <div class="top-image-wrapper">
-    <img src="top.png" alt="Top Image" class="top-image" id="tiltImage" />
+  <div class="container">
+    <img src="toptop.png" alt="Top Image" />
+    <div class="rainbow-text">LONG LIVE KNR</div>
+    <div class="names">
+      <div>SwatKNR</div>
+      <div>PrayKNR</div>
+      <div>KodachiKNR</div>
+      <div>SwatcalledKNR</div>
+      <div>LurkinggKNR</div>
+      <div>UKNR</div>
+      <div>GravesKNR</div>
+      <div>AzezelKNR</div>
+      <div>NNKNR</div>
+      <div>VawuKNR</div>
+      <div>BladeKNR</div>
+      <div>DrippKNR</div>
+      <div>DmdKNR</div>
+      <div>AuoraKNR</div>
+      <div>BLIXKNR</div>
+      <div>FrostKNR</div>
+      <div>DesKNR</div>
+      <div>KuruKNR</div>
+      <div>KroneKNR</div>
+    </div>
   </div>
 
-  <!-- Name List -->
-  <div class="name-list">
-    <div class="name">Chris</div><div class="name">slith</div><div class="name">qoms</div>
-    <div class="name">slachtoffer</div><div class="name">cam</div><div class="name">graves</div>
-    <div class="name">applesaucehurts1</div><div class="name">pizzasleater</div><div class="name">kort</div>
-    <div class="name">despair</div><div class="name">layla</div><div class="name">800ds</div>
-    <div class="name">ageplayerloli</div><div class="name">akane</div><div class="name">alex</div>
-    <div class="name">archi8ve</div><div class="name">dismayings</div><div class="name">kin</div>
-    <div class="name">pe</div><div class="name">rauds</div><div class="name">swat</div>
-    <div class="name">vast</div><div class="name">shy</div><div class="name">dolly</div>
-    <div class="name">slug</div><div class="name">graphicalcontent</div><div class="name">uezt</div>
-    <div class="name">#31</div><div class="name">pussyslayer</div><div class="name">0_x</div><div class="name">634</div>
-  </div>
-
-  <!-- Discord + Gov Link Row -->
-  <div class="links-row">
-    <a href="https://discord.gg/paste" target="_blank" rel="noopener noreferrer">
-      <img src="discord.png" alt="Join Discord" />
-    </a>
-    <a href="https://www.justice.gov/criminal-ccips/extortion" target="_blank" rel="noopener noreferrer">
-      <img src="gov.png" alt="Get Help (Extortion)" />
-    </a>
-  </div>
-
-  <!-- Tilt Script -->
   <script>
-    const image = document.getElementById('tiltImage');
-    document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-      image.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-    });
-    document.addEventListener('mouseleave', () => {
-      image.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    document.addEventListener('mousemove', e => {
+      const particle = document.createElement('img');
+      particle.src = 'trailbro.png'; // your trail image file
+      particle.classList.add('particle');
+
+      const size = Math.random() * 6 + 6;
+      particle.style.width = size + 'px';
+      particle.style.height = 'auto';
+
+      particle.style.left = e.clientX + 'px';
+      particle.style.top = e.clientY + 'px';
+
+      particle.style.animationDuration = (Math.random() + 1.5) + 's';
+
+      document.body.appendChild(particle);
+
+      particle.addEventListener('animationend', () => {
+        particle.remove();
+      });
     });
   </script>
 
-  <!-- Background Music -->
-  <audio src="anewkindoflove.mp3" autoplay loop></audio>
+  <!-- Audio element without controls -->
+  <audio id="bg-music" src="themusic.mp3" loop></audio>
+
+  <script>
+    const music = document.getElementById('bg-music');
+
+    // Try autoplay immediately
+    music.play().catch(() => {
+      // If autoplay blocked, wait for user interaction
+      function playAfterInteraction() {
+        music.play();
+        window.removeEventListener('click', playAfterInteraction);
+        window.removeEventListener('keydown', playAfterInteraction);
+      }
+      window.addEventListener('click', playAfterInteraction);
+      window.addEventListener('keydown', playAfterInteraction);
+    });
+  </script>
 
 </body>
 </html>
