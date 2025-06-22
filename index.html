@@ -2,227 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>sdfg.store</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KNR</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      background: black;
-      color: white;
-      font-family: 'Press Start 2P', monospace;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
-    .screen {
-      position: absolute;
+    /* Intro screen */
+    #enter-screen {
+      position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.9rem;
+      z-index: 10;
+      transition: opacity 1s ease;
+      cursor: pointer;
+    }
+
+    #enter-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Main content */
+    #main-content {
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #main-content.show {
+      opacity: 1;
+    }
+
+    .swing-container {
+      animation: float 10s ease-in-out infinite, fadeInUp 2s ease-out;
+      transform-origin: top center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
     }
 
-    .screen.visible {
-      opacity: 1;
-      pointer-events: auto;
+    .swing-container img {
+      max-height: 320px;
+      width: auto;
+      animation: swing 4s ease-in-out infinite;
+      margin-bottom: 30px;
     }
 
-    .clickable {
-      cursor: pointer;
-      margin: 5px;
+    .title {
+      font-size: 3.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #fff, #aaa, #fff);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shine 4s linear infinite, glow 3s ease-in-out infinite;
     }
 
-    img.profile {
-      border-radius: 50%;
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border: 4px solid white;
-      margin-bottom: 20px;
+    .subtitle {
+      font-size: 1.2rem;
+      color: #bbb;
+      margin-top: 10px;
+      opacity: 0.9;
+      letter-spacing: 1px;
     }
 
-    .username {
-      font-size: 14px;
-      margin-bottom: 5px;
+    /* Animations */
+    @keyframes shine {
+      to { background-position: -200% center; }
     }
 
-    .back {
-      font-size: 14px;
-      margin-top: 0;
-      cursor: pointer;
-      text-align: center;
+    @keyframes swing {
+      0%   { transform: rotate(3deg); }
+      50%  { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
     }
 
-    .discord-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      margin-top: 5px;
-      margin-bottom: 5px;
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 8px #aaa; }
+      50%      { text-shadow: 0 0 12px #fff; }
     }
 
-    .disabled {
-      pointer-events: none;
-      opacity: 0.4;
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-10px); }
     }
 
-    .plus {
-      position: absolute;
-      color: white;
-      font-family: 'Press Start 2P', monospace;
-      pointer-events: none;
-      user-select: none;
-      font-size: 10px;
-      opacity: 1;
-      animation: fadeOut 0.7s forwards;
-    }
-
-    @keyframes fadeOut {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-10px); }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0px);
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Screen 1 -->
-  <div id="screen1" class="screen visible">
-    <div class="clickable" onclick="enterSite()">[enter]</div>
-  </div>
+  <!-- Music Element (hidden) -->
+  <audio id="bg-music" src="the_music.mp3" loop preload="auto"></audio>
 
-  <!-- Screen 2 -->
-  <div id="screen2" class="screen">
-    <div>sdfg.store</div>
-    <div class="clickable" id="membersBtn">members</div>
-  </div>
+  <!-- ENTER SCREEN -->
+  <div id="enter-screen">x_x</div>
 
-  <!-- Screen 3 -->
-  <div id="screen3" class="screen">
-    <div class="clickable" onclick="showProfile('Pray')">Pray</div>
-    <div class="clickable" onclick="showProfile('Swat')">Swat</div>
-    <div class="clickable" onclick="showProfile('Qoms')">Qoms</div>
-    <div class="clickable" onclick="showProfile('Graves')">Graves</div>
-    <div class="clickable" onclick="showProfile('Lurking')">Lurking</div>
-    <div class="clickable" onclick="showProfile('U')">U</div>
-    <div class="clickable" onclick="switchScreen(3, 2)">back</div>
+  <!-- MAIN CONTENT -->
+  <div id="main-content">
+    <div class="swing-container">
+      <img src="01d2b37f-14a4-4ba1-a5dc-04448495d12c.png" alt="Hanging Image">
+      <div class="title">KNR</div>
+      <div class="subtitle">2023–2025</div>
+    </div>
   </div>
-
-  <!-- Screen 4 -->
-  <div id="screen4" class="screen">
-    <img id="profileImage" class="profile" src="" alt="Profile Image" />
-    <div class="username" id="username"></div>
-    <a id="discordLink" href="#" target="_blank">
-      <img src="discord.png" alt="Discord Icon" class="discord-icon" />
-    </a>
-    <div class="back" onclick="returnToMembers()">←</div>
-  </div>
-
-  <!-- Audio -->
-  <audio id="bgMusic" loop preload="auto"></audio>
 
   <script>
-    const discordLinks = {
-      Pray: "discord://-users/224649665608417280",
-      Swat: "N/A",
-      Qoms: "discord://-users/273871090579800064",
-      Graves: "discord://-users/924433603516067910",
-      U: "discord://-users/1180248936691269700",
-      Lurking: "discord://-users/1151046479314698251"
-    };
+    const enterScreen = document.getElementById('enter-screen');
+    const mainContent = document.getElementById('main-content');
+    const music = document.getElementById('bg-music');
 
-    const musicPlayer = document.getElementById("bgMusic");
-    musicPlayer.volume = 0.5;
-    let currentTrack = "";
-
-    function playMusic(fileName) {
-      if (currentTrack === fileName) return;
-      currentTrack = fileName;
-      musicPlayer.pause();
-      musicPlayer.src = fileName;
-      musicPlayer.currentTime = 0;
-      musicPlayer.play().catch(err => console.log("Play failed:", err));
-    }
-
-    function enterSite() {
-      playMusic('themainsong.mp3');
-      switchScreen(1, 2);
-    }
-
-    function switchScreen(from, to) {
-      document.getElementById('screen' + from).classList.remove('visible');
+    enterScreen.addEventListener('click', () => {
+      enterScreen.classList.add('fade-out');
       setTimeout(() => {
-        document.getElementById('screen' + to).classList.add('visible');
-
-        if (to === 4) {
-          enablePlusTrail();
-        } else {
-          disablePlusTrail();
-        }
-      }, 300);
-
-      if (from === 4 && to >= 1 && to <= 3) {
-        playMusic('themainsong.mp3');
-      }
-    }
-
-    function showProfile(name) {
-      document.getElementById('username').textContent = name;
-      document.getElementById('profileImage').src = name + '.png';
-
-      const discordAnchor = document.getElementById('discordLink');
-      const link = discordLinks[name];
-
-      if (link && link !== "N/A") {
-        discordAnchor.href = link;
-        discordAnchor.classList.remove('disabled');
-      } else {
-        discordAnchor.href = "#";
-        discordAnchor.classList.add('disabled');
-      }
-
-      playMusic(name + 'song.mp3');
-      switchScreen(3, 4);
-    }
-
-    function returnToMembers() {
-      switchScreen(4, 3);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      musicPlayer.src = 'themainsong.mp3';
-      musicPlayer.load();
-
-      document.getElementById('membersBtn').addEventListener('click', () => {
-        switchScreen(2, 3);
-      });
+        mainContent.classList.add('show');
+        music.volume = 0.2; // start soft
+        music.play().catch(e => console.log("Music autoplay blocked:", e));
+      }, 1000);
     });
-
-    // + Trail Logic
-    function enablePlusTrail() {
-      document.addEventListener('mousemove', plusTrailHandler);
-    }
-
-    function disablePlusTrail() {
-      document.removeEventListener('mousemove', plusTrailHandler);
-    }
-
-    function plusTrailHandler(e) {
-      const plus = document.createElement('div');
-      plus.className = 'plus';
-      plus.textContent = '+';
-      plus.style.left = `${e.clientX}px`;
-      plus.style.top = `${e.clientY}px`;
-      document.body.appendChild(plus);
-
-      setTimeout(() => {
-        plus.remove();
-      }, 700);
-    }
   </script>
 
 </body>
